@@ -1,6 +1,11 @@
 import sys
 import time
 
+#The program takes a txt as a parameter
+#You have an option to start a word search or exit, any other argument is invalid
+#The user enters a word and that is searched in the dictionary. The word should consist of all alphabets.
+#The found words are displayed, if not words are found, the user is notified. 
+#After the search, user is asked again to search for more words or end the program. 
 
 def main():
     
@@ -48,15 +53,15 @@ def main():
             dictionaryWord = f.readline()
             dictionaryWord = str(dictionaryWord.lower()) # Lowering the case
             
-            if (len(userString) == len(dictionaryWord)-1):
+            if (len(userString) == len(dictionaryWord) - 1):
                 word = True
                 checkWord = [0] * 26
                 for i in range(len(dictionaryWord) - 1): 
                     checkWord[ ord(str(dictionaryWord[i])) - 97] += 1  # Doing same as we did for our input word by creating an array for dictionary word.
                 
-                for i in range(26):          # Comparing two arrays
+                for i in range(26):            # Comparing two arrays
                     if (checkWord[i] != alphabet[i]):
-                        word = False         #as to arrays weren't same
+                        word = False           # As to arrays weren't same
                         break
 
                 if word == True:                # For all true words
