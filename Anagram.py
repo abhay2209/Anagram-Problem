@@ -34,20 +34,20 @@ def main():
 
     while chooseOption == 'search':
         
-        alphabet = [0]*26     # This is like a hash table, It will store the count of a particular letter at it's position in alphabetical order.
+        alphabet = [0] * 26     # This is like a hash table, It will store the count of a particular letter at it's position in alphabetical order.
         ourWords = ""
 
         print('-----------------------------')
         userString = input ("What word do you want to look for? ")
        
-        while len(userString) == 0 or userString.isalpha() == False:     # Making sure that the input is not empty
+        while len(userString) == 0 or userString.isalpha() == False:     # Case where input can be empty or have numeric
             userString = input ("Invalid argument, please enter a valid word: ")
                 
         userString = userString.lower() # Every input and dictionary word should be lower
 
         #Call this one a preprocessing function which takes the user input and hashes it in the above created array
         for i in range(len(userString)): 
-            alphabet[ ord(userString[i]) - 97 ] = countChars(userString, userString[i])
+            alphabet[ ord(userString[i]) - 97 ] += 1
 
             #for i in range(26): [This was for testing my preprocessing]
                 #print(alphabet[i])
@@ -57,20 +57,32 @@ def main():
         for line in f:
             dictionaryWord = f.readline()
             dictionaryWord = str(dictionaryWord.lower()) # Lowering the case
-                #print (ord(str(dictionaryWord[0]))) [for test purposes]
+            '''        #print (ord(str(dictionaryWord[0]))) [for test purposes]
+            if (len(userString) == len(dictionaryWord)-1):
+                checkWord = [0] * 26
+                for i in range(len(dictionaryWord) - 1): 
+                    checkWord[ ord(str(dictionaryWord[i])) - 97] += 1
+                word = True
+                for i in range(26):
+                    if (checkWord[i] != alphabet[i]):
+                        word = False
+                        break
+                if word == True:               # For all true word
+                    ourWords += dictionaryWord  # We print it and proceed to our next step
 
+            '''
                 #****if dictionary word is 'a', length calculated by len function was was 2***
             if (len(userString) == len(dictionaryWord)-1): # Only checking a word if it is similar length 
-                word = True                              # Set to true as it passed our first condition
+                word = True                                # Set to true as it passed our first condition
                 for i in range(len(dictionaryWord) - 1):   # For every letter of the dictionary
-                    letterCount = countChars(dictionaryWord, dictionaryWord[i]) # counting each letter
+                    letterCount = countChars(dictionaryWord, dictionaryWord[i])   # counting each letter
                     if alphabet[ord(str(dictionaryWord[i])) - 97] != letterCount: # if the count for a letter is not same as our created array (Hash Table)
                         word = False                                              # We make it False and break
                         break
                     
                 if word == True:               # For all true word
                     ourWords += dictionaryWord  # We print it and proceed to our next step
-                
+                       
         t4 = time.time()
         if ourWords == "":
             print('No anagram found for given word')
@@ -80,15 +92,14 @@ def main():
 
         print('-----------------------------')
 
-        
-
         print("Time taken for the process: ", t4-t3, "seconds")
+        
         f.seek(0)
         print('-----------------------------')
         chooseOption = input('Enter "search" to search more or enter "exit" to end: ') # To ask if user wantes to look for more words
         chooseOption = chooseOption.lower()
 
-        while chooseOption != 'search'  and  chooseOption != 'exit':                  # making sure a valid argument is enteres by the user
+        while chooseOption != 'search'  and  chooseOption != 'exit':                  # Making sure a valid argument is entered
             chooseOption = input ('Invalid argument, enter either search or exit: ')
             chooseOption = chooseOption.lower()
             
