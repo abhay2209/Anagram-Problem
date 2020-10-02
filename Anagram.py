@@ -1,16 +1,6 @@
 import sys
 import time
 
-def countChars(userString , element): #This function checks the occurence of 
-    count = 0
-    size = len(userString)
-
-    for e in range(size):      
-        if userString[e] == element :
-            count += 1                 #Increasing the counter at each encounter of the 'element alphabet'
-    return count
-
-
 
 def main():
     
@@ -57,32 +47,21 @@ def main():
         for line in f:
             dictionaryWord = f.readline()
             dictionaryWord = str(dictionaryWord.lower()) # Lowering the case
-            '''        #print (ord(str(dictionaryWord[0]))) [for test purposes]
+            
             if (len(userString) == len(dictionaryWord)-1):
+                word = True
                 checkWord = [0] * 26
                 for i in range(len(dictionaryWord) - 1): 
-                    checkWord[ ord(str(dictionaryWord[i])) - 97] += 1
-                word = True
-                for i in range(26):
+                    checkWord[ ord(str(dictionaryWord[i])) - 97] += 1  # Doing same as we did for our input word by creating an array for dictionary word.
+                
+                for i in range(26):          # Comparing two arrays
                     if (checkWord[i] != alphabet[i]):
-                        word = False
+                        word = False         #as to arrays weren't same
                         break
-                if word == True:               # For all true word
-                    ourWords += dictionaryWord  # We print it and proceed to our next step
 
-            '''
-                #****if dictionary word is 'a', length calculated by len function was was 2***
-            if (len(userString) == len(dictionaryWord)-1): # Only checking a word if it is similar length 
-                word = True                                # Set to true as it passed our first condition
-                for i in range(len(dictionaryWord) - 1):   # For every letter of the dictionary
-                    letterCount = countChars(dictionaryWord, dictionaryWord[i])   # counting each letter
-                    if alphabet[ord(str(dictionaryWord[i])) - 97] != letterCount: # if the count for a letter is not same as our created array (Hash Table)
-                        word = False                                              # We make it False and break
-                        break
-                    
-                if word == True:               # For all true word
+                if word == True:                # For all true words
                     ourWords += dictionaryWord  # We print it and proceed to our next step
-                       
+               
         t4 = time.time()
         if ourWords == "":
             print('No anagram found for given word')
