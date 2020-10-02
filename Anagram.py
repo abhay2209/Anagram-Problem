@@ -71,13 +71,18 @@ def main():
                 if word == True:               # For all true word
                     ourWords += dictionaryWord  # We print it and proceed to our next step
                 
-        print('Words found are: ')
-        print(ourWords, end="")
+        t4 = time.time()
+        if ourWords == "":
+            print('No anagram found for given word')
+        else:
+            print('Words found are: ')
+            print(ourWords, end="")
+
         print('-----------------------------')
 
-        t4 = time.time()
+        
 
-        print("Time taken to find words: ", t4-t3, "seconds")
+        print("Time taken for the process: ", t4-t3, "seconds")
         f.seek(0)
         print('-----------------------------')
         chooseOption = input('Enter "search" to search more or enter "exit" to end: ') # To ask if user wantes to look for more words
