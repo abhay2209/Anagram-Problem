@@ -39,15 +39,15 @@ def main():
 
         print('-----------------------------')
         userString = input ("What word do you want to look for? ")
-
-        while len(userString) == 0:     # Making sure that the input is not empty
+       
+        while len(userString) == 0 or userString.isalpha() == False:     # Making sure that the input is not empty
             userString = input ("Invalid argument, please enter a valid word: ")
                 
         userString = userString.lower() # Every input and dictionary word should be lower
 
         #Call this one a preprocessing function which takes the user input and hashes it in the above created array
         for i in range(len(userString)): 
-            alphabet[ ord(userString[i]) - 97 ] = countChars(userString,userString[i])
+            alphabet[ ord(userString[i]) - 97 ] = countChars(userString, userString[i])
 
             #for i in range(26): [This was for testing my preprocessing]
                 #print(alphabet[i])
